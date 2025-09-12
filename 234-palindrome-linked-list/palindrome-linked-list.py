@@ -5,17 +5,26 @@
 #         self.next = next
 class Solution(object):
     def isPalindrome(self, head):
-        test = []
-        
-        while head:
-            test.append(head.val)
-            head = head.next
-        
-        l, r = 0, len(test) - 1
+        fast, slow = head, head
 
-        while l < r:
-            if test[l] != test[r]:
+        #find middle of list
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+
+        
+        #reverse second half starting from slow
+        prev = None
+        while slow:
+            tmp = slow.next
+            slow.next = prev
+            prev = slow
+            slow = tmp
+
+        l, r = head, prev
+        while r:
+            if l.val != r.val:
                 return False
-            l += 1
-            r -= 1
+            l = l.next
+            r = r.next
         return True
