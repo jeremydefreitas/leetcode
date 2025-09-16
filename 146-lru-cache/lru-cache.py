@@ -28,9 +28,10 @@ class LRUCache(object):
         node.next = self.mu
         
 
-    def remove(self, node):
-        prev, nxt = node.prev, node.next
-        prev.next, nxt.prev = nxt, prev  
+    def remove(self, lru):
+        prev, nxt = lru.prev, lru.next
+        prev.next, nxt.prev = nxt, prev
+
 
     def get(self, key):
         if key in self.cache:
